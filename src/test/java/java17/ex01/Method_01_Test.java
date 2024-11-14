@@ -1,5 +1,6 @@
 package java17.ex01;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -19,6 +20,13 @@ public class Method_01_Test {
 
         // TODO créer une méthode int sumAge()
         // TODO Cette méthode retourne le résultat de l'addition des ages des personnes
+        default int sumAge(List<Person> people){
+            int sum = 0;
+            for (Person person : people) {
+                sum += person.getAge();
+            }
+            return sum;
+        };
     }
     // end::IDao[]
 
@@ -28,7 +36,12 @@ public class Method_01_Test {
 
         @Override
         public List<Person> findAll() {
+
             return people;
+        }
+
+        public int getSumAge() {
+            return sumAge(people);
         }
     }
 
@@ -40,6 +53,10 @@ public class Method_01_Test {
         public List<Person> findAll() {
             return people;
         }
+
+        public int getSumAge() {
+            return sumAge(people);
+        }
     }
 
     @Test
@@ -49,8 +66,12 @@ public class Method_01_Test {
 
         // TODO invoquer la méthode sumAge pour que le test soit passant
         int result = 0;
+        result = daoA.getSumAge();
 
         assert result == 210;
+
+
+
     }
 
     @Test
@@ -60,6 +81,7 @@ public class Method_01_Test {
 
         // TODO invoquer la méthode sumAge pour que le test soit passant
         int result = 0;
+        result = daoB.getSumAge();
 
         assert result == 5050;
 
